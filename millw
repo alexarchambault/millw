@@ -95,11 +95,11 @@ fi
 MILL="${MILL_DOWNLOAD_PATH}/${MILL_VERSION}"
 
 try_to_use_system_mill() {
-  MILL_IN_PATH=$(command -v mill || true)
-
-  if [ -z "${MILL_IN_PATH}" ]; then
+  if ! command -v mill 2>/dev/null; then
     return
   fi
+
+  MILL_IN_PATH="$(command -v mill)"
 
   UNIVERSAL_SCRIPT_MAGIC="@ 2>/dev/null # 2>nul & echo off & goto BOF"
 
